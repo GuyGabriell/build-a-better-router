@@ -21,5 +21,13 @@ spl_autoload_register(function ($class) {
 
 
 
-new \Core\Router();
+$router = new \Core\Router();
+
+//require the routes then parse it, route the current uri to where its needs to go.
+
+$routes = require base_path('routes.php');
+
+$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
+
+$router->route($uri);
 

@@ -67,6 +67,32 @@ class Router {
 
     }
 
+    public function route($uri){
+
+      foreach ($this->routes as $route){
+
+        if ($route['uri'] === $uri){
+
+            return require base_path($route['controller']);
+        }
+        
+      }  
+
+      //abort
+
+    }
+
+
+    protected function abort($code = 404) {
+
+        http_response_code($code);
+
+        require base_path("views/{$code}.php");
+
+        die();
+
+    }
+
 
 }
 
@@ -87,7 +113,7 @@ class Router {
 //}
 //
 //
-//function abort($code = 404) {
+// function abort($code = 404) {
 //
 //    http_response_code($code);
 //
